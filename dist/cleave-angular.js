@@ -1592,12 +1592,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    getActiveElement: function(parent) {
-	        console.log(parent);
-	        var activeElement = parent.activeElement;
-	        if (activeElement && activeElement.shadowRoot) {
-	            return this.getActiveElement(activeElement.shadowRoot);
+	        if (parent) {
+	            var activeElement = parent.activeElement;
+	            if (activeElement && activeElement.shadowRoot) {
+	                return this.getActiveElement(activeElement.shadowRoot);
+	            }
+	            return activeElement;
 	        }
-	        return activeElement;
+	        return null;
 	    },
 
 	    isAndroid: function() {
