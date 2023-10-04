@@ -1,3 +1,8 @@
+# This is a forked version of cleave to fix the activeElement error.
+
+
+
+# Original Cleave README
 # Cleave.js
 
 [![Travis](https://img.shields.io/travis/nosir/cleave.js.svg?maxAge=2592000)](https://travis-ci.org/nosir/cleave.js)
