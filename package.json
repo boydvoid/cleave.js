@@ -1,7 +1,7 @@
 {
-	"name": "cleave.js",
+	"name": "insite/cleave.js",
 	"title": "cleave.js",
-	"description": "JavaScript library for formatting input text content when you are typing",
+	"description": "Fork of cleave.js",
 	"keywords": [
 		"cleave",
 		"javascript",
@@ -35,7 +35,7 @@
 	"module": "dist/cleave-esm.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/nosir/cleave.js.git"
+		"url": "https://github.com/boydvoid/cleave.js.git"
 	},
 	"scripts": {
 		"test": "gulp test",
