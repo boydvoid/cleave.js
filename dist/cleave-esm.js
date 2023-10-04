@@ -697,14 +697,14 @@ var CreditCardDetector = {
 var CreditCardDetector_1 = CreditCardDetector;
 
 var Util = {
-    noop: function () {
+    noop: function() {
     },
 
-    strip: function (value, re) {
+    strip: function(value, re) {
         return value.replace(re, '');
     },
 
-    getPostDelimiter: function (value, delimiter, delimiters) {
+    getPostDelimiter: function(value, delimiter, delimiters) {
         // single delimiter
         if (delimiters.length === 0) {
             return value.slice(-delimiter.length) === delimiter ? delimiter : '';
@@ -712,7 +712,7 @@ var Util = {
 
         // multiple delimiters
         var matchedDelimiter = '';
-        delimiters.forEach(function (current) {
+        delimiters.forEach(function(current) {
             if (value.slice(-current.length) === current) {
                 matchedDelimiter = current;
             }
@@ -721,21 +721,21 @@ var Util = {
         return matchedDelimiter;
     },
 
-    getDelimiterREByDelimiter: function (delimiter) {
+    getDelimiterREByDelimiter: function(delimiter) {
         return new RegExp(delimiter.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1'), 'g');
     },
 
-    getNextCursorPosition: function (prevPos, oldValue, newValue, delimiter, delimiters) {
-      // If cursor was at the end of value, just place it back.
-      // Because new value could contain additional chars.
-      if (oldValue.length === prevPos) {
-          return newValue.length;
-      }
+    getNextCursorPosition: function(prevPos, oldValue, newValue, delimiter, delimiters) {
+        // If cursor was at the end of value, just place it back.
+        // Because new value could contain additional chars.
+        if (oldValue.length === prevPos) {
+            return newValue.length;
+        }
 
-      return prevPos + this.getPositionOffset(prevPos, oldValue, newValue, delimiter ,delimiters);
+        return prevPos + this.getPositionOffset(prevPos, oldValue, newValue, delimiter, delimiters);
     },
 
-    getPositionOffset: function (prevPos, oldValue, newValue, delimiter, delimiters) {
+    getPositionOffset: function(prevPos, oldValue, newValue, delimiter, delimiters) {
         var oldRawValue, newRawValue, lengthOffset;
 
         oldRawValue = this.stripDelimiters(oldValue.slice(0, prevPos), delimiter, delimiters);
@@ -745,7 +745,7 @@ var Util = {
         return (lengthOffset !== 0) ? (lengthOffset / Math.abs(lengthOffset)) : 0;
     },
 
-    stripDelimiters: function (value, delimiter, delimiters) {
+    stripDelimiters: function(value, delimiter, delimiters) {
         var owner = this;
 
         // single delimiter
@@ -756,8 +756,8 @@ var Util = {
         }
 
         // multiple delimiters
-        delimiters.forEach(function (current) {
-            current.split('').forEach(function (letter) {
+        delimiters.forEach(function(current) {
+            current.split('').forEach(function(letter) {
                 value = value.replace(owner.getDelimiterREByDelimiter(letter), '');
             });
         });
@@ -765,12 +765,12 @@ var Util = {
         return value;
     },
 
-    headStr: function (str, length) {
+    headStr: function(str, length) {
         return str.slice(0, length);
     },
 
-    getMaxLength: function (blocks) {
-        return blocks.reduce(function (previous, current) {
+    getMaxLength: function(blocks) {
+        return blocks.reduce(function(previous, current) {
             return previous + current;
         }, 0);
     },
@@ -781,15 +781,15 @@ var Util = {
     // PREFIX-123   |   PEFIX-123     |     123
     // PREFIX-123   |   PREFIX-23     |     23
     // PREFIX-123   |   PREFIX-1234   |     1234
-    getPrefixStrippedValue: function (value, prefix, prefixLength, prevResult, delimiter, delimiters, noImmediatePrefix, tailPrefix, signBeforePrefix) {
+    getPrefixStrippedValue: function(value, prefix, prefixLength, prevResult, delimiter, delimiters, noImmediatePrefix, tailPrefix, signBeforePrefix) {
         // No prefix
         if (prefixLength === 0) {
-          return value;
+            return value;
         }
 
         // Value is prefix
         if (value === prefix && value !== '') {
-          return '';
+            return '';
         }
 
         if (signBeforePrefix && (value.slice(0, 1) == '-')) {
@@ -822,7 +822,7 @@ var Util = {
         return tailPrefix ? value.slice(0, -prefixLength) : value.slice(prefixLength);
     },
 
-    getFirstDiffIndex: function (prev, current) {
+    getFirstDiffIndex: function(prev, current) {
         var index = 0;
 
         while (prev.charAt(index) === current.charAt(index)) {
@@ -834,7 +834,7 @@ var Util = {
         return index;
     },
 
-    getFormattedValue: function (value, blocks, blocksLength, delimiter, delimiters, delimiterLazyShow) {
+    getFormattedValue: function(value, blocks, blocksLength, delimiter, delimiters, delimiterLazyShow) {
         var result = '',
             multipleDelimiters = delimiters.length > 0,
             currentDelimiter = '';
@@ -844,7 +844,7 @@ var Util = {
             return value;
         }
 
-        blocks.forEach(function (length, index) {
+        blocks.forEach(function(length, index) {
             if (value.length > 0) {
                 var sub = value.slice(0, length),
                     rest = value.slice(length);
@@ -879,7 +879,7 @@ var Util = {
 
     // move cursor to the end
     // the first time user focuses on an input with prefix
-    fixPrefixCursor: function (el, prefix, delimiter, delimiters) {
+    fixPrefixCursor: function(el, prefix, delimiter, delimiters) {
         if (!el) {
             return;
         }
@@ -894,31 +894,31 @@ var Util = {
         var len = val.length * 2;
 
         // set timeout to avoid blink
-        setTimeout(function () {
+        setTimeout(function() {
             el.setSelectionRange(len, len);
         }, 1);
     },
 
     // Check if input field is fully selected
     checkFullSelection: function(value) {
-      try {
-        var selection = window.getSelection() || document.getSelection() || {};
-        return selection.toString().length === value.length;
-      } catch (ex) {
-        // Ignore
-      }
+        try {
+            var selection = window.getSelection() || document.getSelection() || {};
+            return selection.toString().length === value.length;
+        } catch (ex) {
+            // Ignore
+        }
 
-      return false;
+        return false;
     },
 
-    setSelection: function (element, position, doc) {
+    setSelection: function(element, position, doc) {
         if (element !== this.getActiveElement(doc)) {
             return;
         }
 
         // cursor is already in the end
         if (element && element.value.length <= position) {
-          return;
+            return;
         }
 
         if (element.createTextRange) {
@@ -937,6 +937,7 @@ var Util = {
     },
 
     getActiveElement: function(parent) {
+        console.log(parent);
         var activeElement = parent.activeElement;
         if (activeElement && activeElement.shadowRoot) {
             return this.getActiveElement(activeElement.shadowRoot);
@@ -944,7 +945,7 @@ var Util = {
         return activeElement;
     },
 
-    isAndroid: function () {
+    isAndroid: function() {
         return navigator && /android/i.test(navigator.userAgent);
     },
 
@@ -952,7 +953,7 @@ var Util = {
     // always return key code 229 as a composition that
     // buffers the user’s keystrokes
     // see https://github.com/nosir/cleave.js/issues/147
-    isAndroidBackspaceKeydown: function (lastInputValue, currentInputValue) {
+    isAndroidBackspaceKeydown: function(lastInputValue, currentInputValue) {
         if (!this.isAndroid() || !lastInputValue || !currentInputValue) {
             return false;
         }
